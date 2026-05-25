@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlueWave · shop like Amazon</title>
+    <!-- Font Awesome 5 for icons (cart, wishlist, user) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header : blue & yellow -->
+    <header class="top-header">
+        <div class="logo">
+            <h1>Blue<span>Wave</span></h1>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for anything..." onkeyup="searchProducts()" id="searchInput">
+            <button id="searchBtn"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="user-actions">
+            <button class="icon-btn" id="openCartBtn"><i class="fas fa-shopping-cart"></i><span>Cart <span id="cartCount" class="badge">0</span></span></button>
+            <button class="icon-btn" id="openWishlistBtn"><i class="fas fa-heart"></i><span>Wishlist <span id="wishlistCount" class="badge">0</span></span></button>
+            <button class="icon-btn" id="showSignInModalBtn"><i class="fas fa-user-circle"></i><span>Sign in</span></button>
+        </div>
+    </header>
+
+    <!-- main container -->
+    <div class="container">
+        <!-- welcome row (dynamic after login) -->
+        <div class="welcome-banner" id="welcomeBanner" style="display: none;">
+            <span>👋 Welcome, <span id="userDisplayName">Guest</span> !</span>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+        </div>
+
+        <!-- Product grid -->
+        <h2 style="color: var(--primary-blue); margin-bottom: 0.5rem;">✨ Trending for you</h2>
+        <div class="product-grid" id="productGrid"></div>
+
+        <!-- Payment / checkout area (proof of payment) -->
+        <div class="checkout-section">
+            <div class="checkout-title">
+                <i class="fas fa-university" style="font-size: 2rem; color: var(--primary-blue);"></i>
+                <h2>💳 Pay with your card</h2>
+            </div>
+            <div class="bank-form">
+                <input type="text" placeholder="Card number (e.g., 4111 1111 1111 1111)" id="cardNumber">
+                <input type="text" placeholder="Name on card" id="cardName">
+                <input type="text" placeholder="MM/YY" id="cardExpiry" style="max-width: 100px;">
+                <button class="btn-pay" id="payButton"><i class="fas fa-lock"></i> Pay now</button>
+            </div>
+            <!-- PROOF OF PAYMENT area (linked to your bank account) -->
+            <div class="proof-panel" id="proofContainer" style="display: none;">
+                <p style="font-weight: 700; color: var(--primary-blue);">🧾 PROOF OF PAYMENT (sent to your bank)</p>
+                <p id="proofText"></p>
+                <p style="color: #1e3a8a;">⬆️ This receipt confirms funds were transferred to <strong>BlueWave Business Account (Bank: SA 123456789)</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign In / Sign Up modals -->
+    <div id="signInModal" class="modal-overlay">
+        <div class="modal-card">
+            <span class="close-modal" id="closeSignIn">&times;</span>
+            <h2>Sign in</h2>
+            <input type="email" placeholder="Email" id="signInEmail">
+            <input type="password" placeholder="Password" id="signInPassword">
+            <button class="btn" id="signInBtn">Sign in</button>
+            <div class="switch-text">New here? <a href="#" id="switchToSignUp">Create account</a></div>
+        </div>
+    </div>
+
+    <div id="signUpModal" class="modal-overlay">
+        <div class="modal-card">
+            <span class="close-modal" id="closeSignUp">&times;</span>
+            <h2>Sign up</h2>
+            <input type="text" placeholder="Full name" id="signUpName">
+            <input type="email" placeholder="Email" id="signUpEmail">
+            <input type="password" placeholder="Password" id="signUpPassword">
+            <button class="btn btn-yellow" id="signUpBtn">Create account</button>
+            <div class="switch-text">Already have an account? <a href="#" id="switchToSignIn">Sign in</a></div>
+        </div>
+    </div>
+
+    <!-- slide cart panel -->
+    <div id="cartPanel" class="side-panel">
+        <div class="panel-header">
+            <h2><i class="fas fa-shopping-cart"></i> Cart</h2>
+            <span class="close-panel" id="closeCart">&times;</span>
+        </div>
+        <div id="cartItemsList"></div>
+        <hr style="margin: 1rem 0">
+        <p><strong>Total: R<span id="cartTotal">0.00</span></strong></p>
+    </div>
+
+    <!-- slide wishlist panel -->
+    <div id="wishlistPanel" class="side-panel">
+        <div class="panel-header">
+            <h2><i class="fas fa-heart"></i> Wishlist</h2>
+            <span class="close-panel" id="closeWishlist">&times;</span>
+        </div>
+        <div id="wishlistItemsList"></div>
+    </div>
+
+    <footer>
+        <p>© 2025 BlueWave — secure payments linked to your bank account</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
